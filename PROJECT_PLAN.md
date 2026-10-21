@@ -51,13 +51,40 @@ None at present. New questions raised during implementation go here, each naming
 
 ## 3. Architecture
 
-```
-            ┌──────────┐  paths   ┌────────────────────┐ MediaItem ┌──────────┐ Plan ┌──────────┐ Journal
- sources ──►│  Walker  │────────► │ Extract pool (N)   │─────────► │ Planner  │────► │ Executor │──────► report
-            │ (1/root) │          │ type sniff, meta,  │           │ (single, │      │ pool (M) │
-            └──────────┘          │ date chain, hash   │           │ determin-│      └──────────┘
-                                  └────────────────────┘           │ istic)   │
-                                                                   └──────────┘
+```mermaid
+flowchart LR
+    SRC[(Source folders)] --> W
+
+    subgraph Scan["Scan (parallel)"]
+        W["Walker<br/>1 goroutine per root"]
+        subgraph EP["Extract pool (-j N)"]
+            D[detect<br/>magic bytes] --> M[meta<br/>EXIF / MP4 atoms / filename]
+            M --> DC["datechain<br/>exif → filename → mtime, --tz"]
+            D --> H[hash<br/>SHA-256]
+        end
+        W -- paths --> D
+    end
+
+    CFG[/"Config (TOML) + CLI flags"/] --> P
+    T["template + sanitize"] --> P
+    DC -- MediaItem --> P
+    H -- MediaItem --> P
+
+    P{{"Planner<br/>single goroutine, deterministic<br/>sequences, collisions, sidecars"}}
+    P -- needs decision --> Q["Prompt (TTY, 60 s timeout)<br/>or message + exit"]
+    Q -- answer --> P
+    P -- Plan --> C["Summary + confirm<br/>(or --yes / --dry-run)"]
+    C --> X
+
+    subgraph Apply["Apply (parallel)"]
+        X["Executor pool (--io-jobs M)<br/>fsops: copy → verify → (move: delete source)"]
+    end
+
+    X --> J[(Journal JSONL)]
+    X --> DST[(Destination tree)]
+    X --> R[Report: human / JSON]
+    J --> U["undo / --resume"]
+    U --> DST
 ```
 
 | Component | Responsibility | Parallelism |
