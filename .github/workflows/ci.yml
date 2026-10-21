@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (${{ matrix.name }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            name: Linux amd64
+          - os: ubuntu-24.04-arm
+            name: Linux arm64
+          - os: macos-latest
+            name: macOS arm64
+          - os: macos-15-intel
+            name: macOS amd64
+          - os: windows-latest
+            name: Windows amd64
+          - os: windows-11-arm
+            name: Windows arm64
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Verify dependencies
+        run: go mod verify
+
+      - name: Run tests with race detector
+        run: go test -v -race ./...
+        env:
+          CGO_ENABLED: 1
+
+      - name: Build binary
+        run: go build -trimpath -v ./...
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v9
+        with:
+          version: v2.15.0
+
+  security:
+    name: Security & Vulnerabilities
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Verify dependencies
+        run: go mod verify
+
+      - name: Run gosec (AST security scan)
+        run: go tool gosec ./...
+
+      - name: Run govulncheck (vulnerability scan)
+        run: go tool govulncheck ./...
+
+  ci-status:
+    name: CI Status
+    needs: [test, lint, security]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Evaluate pipeline status
+        run: |
+          if [ "${{ needs.test.result }}" != "success" ] || \
+             [ "${{ needs.lint.result }}" != "success" ] || \
+             [ "${{ needs.security.result }}" != "success" ]; then
+            echo "CI pipeline failed"
+            exit 1
+          fi
+          echo "All CI pipeline checks passed"
