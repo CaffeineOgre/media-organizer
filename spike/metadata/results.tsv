@@ -1,0 +1,189 @@
+file	lib	date	zone	make	model	ms	error
+ARW.exif	imagemeta	2017-10-22T11:54:20Z	naive(stamped UTC)	Sony	SLT-A55V	0	
+ARW.exif	rwcarlsen/goexif	2017-10-22T11:54:20	naive(host-local stamped)	SONY	SLT-A55V	1	
+ARW.exif	dsoprea/go-exif	2017-10-22T11:54:20	naive	SONY	SLT-A55V	2	
+ARW.exif	abema/go-mp4					0	
+ARW.exif.json	imagemeta					0	error imagetype not found
+ARW.exif.json	rwcarlsen/goexif					0	EOF
+ARW.exif.json	dsoprea/go-exif					0	no exif data
+ARW.exif.json	abema/go-mp4					0	
+AVIF.avif	imagemeta					0	
+AVIF.avif	rwcarlsen/goexif					0	exif: failed to find exif intro marker
+AVIF.avif	dsoprea/go-exif					0	no exif data
+AVIF.avif	abema/go-mp4					0	
+AVIF2.avif	imagemeta					0	
+AVIF2.avif	rwcarlsen/goexif					0	exif: failed to find exif intro marker
+AVIF2.avif	dsoprea/go-exif					3	no exif data
+AVIF2.avif	abema/go-mp4					0	
+CR2.exif	imagemeta	2007-10-18T13:44:32Z	naive(stamped UTC)	Canon	Canon EOS-1Ds Mark III	0	
+CR2.exif	rwcarlsen/goexif	2007-10-18T13:44:32	naive(host-local stamped)	Canon	Canon EOS-1Ds Mark III	0	
+CR2.exif	dsoprea/go-exif	2007-10-18T13:44:32	naive	Canon	Canon EOS-1Ds Mark III	1	
+CR2.exif	abema/go-mp4					0	
+CR2.exif.json	imagemeta					0	error imagetype not found
+CR2.exif.json	rwcarlsen/goexif					0	EOF
+CR2.exif.json	dsoprea/go-exif					1	no exif data
+CR2.exif.json	abema/go-mp4					0	
+CRW.CRW	imagemeta	2018-01-01T13:03:32Z	naive(stamped UTC)	Canon	Canon EOS D30	0	
+CRW.CRW	rwcarlsen/goexif					0	exif: failed to find exif intro marker
+CRW.CRW	dsoprea/go-exif					28	no exif data
+CRW.CRW	abema/go-mp4					0	
+GIF.gif	imagemeta					0	error no Exif
+GIF.gif	rwcarlsen/goexif					0	EOF
+GIF.gif	dsoprea/go-exif					0	no exif data
+GIF.gif	abema/go-mp4					0	
+Heic.exif	imagemeta	2019-12-06T05:01:47Z	naive(stamped UTC)	Canon	Canon EOS 6D	0	
+Heic.exif	rwcarlsen/goexif					0	EOF
+Heic.exif	dsoprea/go-exif					0	EOF
+Heic.exif	abema/go-mp4					0	
+Heic.exif.json	imagemeta					0	error imagetype not found
+Heic.exif.json	rwcarlsen/goexif					0	EOF
+Heic.exif.json	dsoprea/go-exif					0	no exif data
+Heic.exif.json	abema/go-mp4					0	
+Hero8.GPR	imagemeta	2020-05-28T04:47:27Z	naive(stamped UTC)	GoPro	HERO8 Black	0	
+Hero8.GPR	rwcarlsen/goexif	2020-05-28T04:47:27	naive(host-local stamped)	GoPro	HERO8 Black	2	
+Hero8.GPR	dsoprea/go-exif	2020-05-28T04:47:27	naive	GoPro	HERO8 Black	2	
+Hero8.GPR	abema/go-mp4					0	
+Hero8.GPR.json	imagemeta					0	error imagetype not found
+Hero8.GPR.json	rwcarlsen/goexif					0	EOF
+Hero8.GPR.json	dsoprea/go-exif					0	no exif data
+Hero8.GPR.json	abema/go-mp4					0	
+JPEG.jpg	imagemeta					0	
+JPEG.jpg	rwcarlsen/goexif	2016-10-11T16:59:50	naive(host-local stamped)	GoPro	HERO4 Silver	0	
+JPEG.jpg	dsoprea/go-exif	2016-10-11T16:59:50	naive	GoPro	HERO4 Silver	1	
+JPEG.jpg	abema/go-mp4					0	
+JPEG.jpg.json	imagemeta					0	error imagetype not found
+JPEG.jpg.json	rwcarlsen/goexif					0	EOF
+JPEG.jpg.json	dsoprea/go-exif					0	no exif data
+JPEG.jpg.json	abema/go-mp4					0	
+NEF.exif	imagemeta	2013-09-03T09:45:16Z	naive(stamped UTC)	Nikon	NIKON D7100	0	
+NEF.exif	rwcarlsen/goexif	2013-09-03T09:45:16	naive(host-local stamped)	NIKON CORPORATION	NIKON D7100	2	
+NEF.exif	dsoprea/go-exif	2013-09-03T09:45:16	naive	NIKON CORPORATION	NIKON D7100	2	
+NEF.exif	abema/go-mp4					0	
+NEF.exif.json	imagemeta					0	error imagetype not found
+NEF.exif.json	rwcarlsen/goexif					0	EOF
+NEF.exif.json	dsoprea/go-exif					0	no exif data
+NEF.exif.json	abema/go-mp4					0	
+NoExif.jpg	imagemeta	2019-09-29T15:19:54Z	naive(stamped UTC)			0	
+NoExif.jpg	rwcarlsen/goexif	2019-09-29T15:19:54	naive(host-local stamped)			0	
+NoExif.jpg	dsoprea/go-exif	2019-09-29T15:19:54	naive			0	
+NoExif.jpg	abema/go-mp4					0	
+Unknown.exif	imagemeta					0	error imagetype not found
+Unknown.exif	rwcarlsen/goexif					0	EOF
+Unknown.exif	dsoprea/go-exif					0	no exif data
+Unknown.exif	abema/go-mp4					0	
+XMP.xmp	imagemeta					0	error no Exif
+XMP.xmp	rwcarlsen/goexif					0	EOF
+XMP.xmp	dsoprea/go-exif					0	no exif data
+XMP.xmp	abema/go-mp4					0	
+empty.jpg	imagemeta					0	EOF
+empty.jpg	rwcarlsen/goexif					0	exif: error reading 4 byte header, got 0, EOF
+empty.jpg	dsoprea/go-exif					0	no exif data
+empty.jpg	abema/go-mp4					0	
+exifsamples.IMG_5195.HEIC	imagemeta	2021-04-11T15:47:53-05:00	offset(OffsetTimeOriginal)	Apple	iPhone 11 Pro Max	0	
+exifsamples.IMG_5195.HEIC	rwcarlsen/goexif					0	exif: failed to find exif intro marker
+exifsamples.IMG_5195.HEIC	dsoprea/go-exif	2021-04-11T15:47:53	naive	Apple	iPhone 11 Pro Max	1	
+exifsamples.IMG_5195.HEIC	abema/go-mp4					0	
+exifsamples.samplefilehub.heif	imagemeta					0	
+exifsamples.samplefilehub.heif	rwcarlsen/goexif					0	EOF
+exifsamples.samplefilehub.heif	dsoprea/go-exif					0	
+exifsamples.samplefilehub.heif	abema/go-mp4					0	
+exiftool.Apple.jpg	imagemeta	2016-09-28T18:18:05Z	naive(stamped UTC)	Apple	iPhone 7	0	
+exiftool.Apple.jpg	rwcarlsen/goexif	2016-09-28T18:18:05	naive(host-local stamped)	Apple	iPhone 7	0	
+exiftool.Apple.jpg	dsoprea/go-exif	2016-09-28T18:18:05	naive	Apple	iPhone 7	1	
+exiftool.Apple.jpg	abema/go-mp4					0	
+exiftool.DNG.dng	imagemeta	2005-08-03T18:59:18Z	naive(stamped UTC)	Canon	Canon EOS 350D DIGITAL	0	
+exiftool.DNG.dng	rwcarlsen/goexif	2005-08-03T18:59:18	naive(host-local stamped)	Canon	Canon EOS 350D DIGITAL	0	
+exiftool.DNG.dng	dsoprea/go-exif	2005-08-03T18:59:18	naive	Canon	Canon EOS 350D DIGITAL	2	
+exiftool.DNG.dng	abema/go-mp4					0	
+exiftool.Google.jpg	imagemeta	2023-10-06T22:53:51+02:00	offset(OffsetTimeOriginal)	Google	Pixel 8 Pro	0	
+exiftool.Google.jpg	rwcarlsen/goexif	2023-10-06T22:53:51	naive(host-local stamped)	Google	Pixel 8 Pro	0	
+exiftool.Google.jpg	dsoprea/go-exif	2023-10-06T22:53:51	naive	Google	Pixel 8 Pro	2	
+exiftool.Google.jpg	abema/go-mp4					0	
+exiftool.Nikon.nef	imagemeta	2004-06-09T16:02:35Z	naive(stamped UTC)	Nikon	NIKON D70	0	
+exiftool.Nikon.nef	rwcarlsen/goexif	2004-06-09T16:02:35	naive(host-local stamped)	NIKON CORPORATION	NIKON D70	0	
+exiftool.Nikon.nef	dsoprea/go-exif	2004-06-09T16:02:35	naive	NIKON CORPORATION	NIKON D70	1	
+exiftool.Nikon.nef	abema/go-mp4					0	
+exiftool.Pentax.avi	imagemeta					0	error imagetype not found
+exiftool.Pentax.avi	rwcarlsen/goexif					0	EOF
+exiftool.Pentax.avi	dsoprea/go-exif					0	no exif data
+exiftool.Pentax.avi	abema/go-mp4					0	
+exiftool.QuickTime.heic	imagemeta					0	readIinf: unsupported version 2
+exiftool.QuickTime.heic	rwcarlsen/goexif					0	EOF
+exiftool.QuickTime.heic	dsoprea/go-exif					0	no exif data
+exiftool.QuickTime.heic	abema/go-mp4					0	
+exiftool.QuickTime.m4a	imagemeta					0	error imagetype not found
+exiftool.QuickTime.m4a	rwcarlsen/goexif					0	EOF
+exiftool.QuickTime.m4a	dsoprea/go-exif					0	no exif data
+exiftool.QuickTime.m4a	abema/go-mp4	2005-06-29T19:02:19Z	utc-only			0	
+exiftool.QuickTime.mov	imagemeta					0	error imagetype not found
+exiftool.QuickTime.mov	rwcarlsen/goexif					0	EOF
+exiftool.QuickTime.mov	dsoprea/go-exif					0	no exif data
+exiftool.QuickTime.mov	abema/go-mp4	2005-08-11T14:03:54Z	utc-only			0	
+exiftool.RIFF.avi	imagemeta					0	error imagetype not found
+exiftool.RIFF.avi	rwcarlsen/goexif					0	EOF
+exiftool.RIFF.avi	dsoprea/go-exif					0	no exif data
+exiftool.RIFF.avi	abema/go-mp4					0	
+exiftool.Sony.jpg	imagemeta	2003-12-18T13:51:33Z	naive(stamped UTC)	Sony	DSC-F828	0	
+exiftool.Sony.jpg	rwcarlsen/goexif	2003-12-18T13:51:33	naive(host-local stamped)	SONY	DSC-F828	0	
+exiftool.Sony.jpg	dsoprea/go-exif	2003-12-18T13:51:33	naive	SONY	DSC-F828	0	
+exiftool.Sony.jpg	abema/go-mp4					0	
+exiftool.cr3	imagemeta	2018-02-21T12:08:56Z	offset(OffsetTimeOriginal)	Canon	Canon EOS M50	0	
+exiftool.cr3	rwcarlsen/goexif					0	EOF
+exiftool.cr3	dsoprea/go-exif	2018-02-21T12:08:56	naive	Canon	Canon EOS M50	2	
+exiftool.cr3	abema/go-mp4	2018-02-21T12:08:56Z	utc-only			0	
+hostile-bigatom.mp4	imagemeta					0	error imagetype not found
+hostile-bigatom.mp4	rwcarlsen/goexif					0	EOF
+hostile-bigatom.mp4	dsoprea/go-exif					0	no exif data
+hostile-bigatom.mp4	abema/go-mp4					0	box size exceeds file size: offset=20, size=4294967280, fileSize=60
+hostile-ifd.jpg	imagemeta					0	
+hostile-ifd.jpg	rwcarlsen/goexif					0	
+hostile-ifd.jpg	dsoprea/go-exif					0	unexpected EOF
+hostile-ifd.jpg	abema/go-mp4					0	
+hostile-ifdloop.jpg	imagemeta					0	
+hostile-ifdloop.jpg	rwcarlsen/goexif					0	exif: decode failed (tiff: recursive IFD) 
+hostile-ifdloop.jpg	dsoprea/go-exif					0	
+hostile-ifdloop.jpg	abema/go-mp4					0	
+hostile-nested.mp4	imagemeta					0	error imagetype not found
+hostile-nested.mp4	rwcarlsen/goexif					0	EOF
+hostile-nested.mp4	dsoprea/go-exif					0	no exif data
+hostile-nested.mp4	abema/go-mp4					27	
+hostile-zero-atoms.mp4	imagemeta					0	error imagetype not found
+hostile-zero-atoms.mp4	rwcarlsen/goexif					0	EOF
+hostile-zero-atoms.mp4	dsoprea/go-exif					0	no exif data
+hostile-zero-atoms.mp4	abema/go-mp4					2	
+ppm-ascii.ppm	imagemeta					0	error no Exif
+ppm-ascii.ppm	rwcarlsen/goexif					0	EOF
+ppm-ascii.ppm	dsoprea/go-exif					0	no exif data
+ppm-ascii.ppm	abema/go-mp4					0	
+ppm-raw.ppm	imagemeta					0	error no Exif
+ppm-raw.ppm	rwcarlsen/goexif					0	EOF
+ppm-raw.ppm	dsoprea/go-exif					0	no exif data
+ppm-raw.ppm	abema/go-mp4					0	
+sample.dng	imagemeta	2017-01-05T13:52:55Z	naive(stamped UTC)	Canon	Canon EOS 5D Mark III	0	
+sample.dng	rwcarlsen/goexif	2017-01-05T13:52:55	naive(host-local stamped)	Canon	Canon EOS 5D Mark III	14	
+sample.dng	dsoprea/go-exif	2017-01-05T13:52:55	naive	Canon	Canon EOS 5D Mark III	11	
+sample.dng	abema/go-mp4					0	
+synth-apple.mov	imagemeta					0	error imagetype not found
+synth-apple.mov	rwcarlsen/goexif					0	EOF
+synth-apple.mov	dsoprea/go-exif					0	no exif data
+synth-apple.mov	abema/go-mp4	2023-01-02T12:34:56Z	utc-only			0	
+synth-zero-date.mp4	imagemeta					0	error imagetype not found
+synth-zero-date.mp4	rwcarlsen/goexif					0	EOF
+synth-zero-date.mp4	dsoprea/go-exif					0	no exif data
+synth-zero-date.mp4	abema/go-mp4	1904-01-01T00:00:00Z	utc-only			0	
+synth.3gp	imagemeta					0	error imagetype not found
+synth.3gp	rwcarlsen/goexif					0	EOF
+synth.3gp	dsoprea/go-exif					0	no exif data
+synth.3gp	abema/go-mp4	2023-01-02T12:34:56Z	utc-only			0	
+synth.mov	imagemeta					0	error imagetype not found
+synth.mov	rwcarlsen/goexif					0	EOF
+synth.mov	dsoprea/go-exif					0	no exif data
+synth.mov	abema/go-mp4	2023-01-02T12:34:56Z	utc-only			0	
+synth.mp4	imagemeta					0	error imagetype not found
+synth.mp4	rwcarlsen/goexif					0	EOF
+synth.mp4	dsoprea/go-exif					0	no exif data
+synth.mp4	abema/go-mp4	2023-01-02T12:34:56Z	utc-only			0	
+truncated.jpg	imagemeta					0	no JPEG Marker
+truncated.jpg	rwcarlsen/goexif					0	EOF
+truncated.jpg	dsoprea/go-exif					0	no exif data
+truncated.jpg	abema/go-mp4					0	
