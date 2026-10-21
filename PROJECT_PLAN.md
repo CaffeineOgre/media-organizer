@@ -1,6 +1,6 @@
 # media-organizer — Project Plan
 
-A Go CLI that scans folders of photos and home movies, reads their embedded metadata (EXIF, QuickTime/MP4 atoms), and copies (or, opt-in, moves) them into a configurable folder tree with optional renaming. Secure by design and by default, parallel where it helps.
+A Go CLI that scans folders of photos and home movies, reads their embedded metadata (EXIF, QuickTime/MP4 atoms), and copies, or, optionally, moves them into a configurable folder tree with optional renaming.
 
 - **Repo:** `CaffeineOgre/media-organizer` (sibling of `file-deduper`, `folder-sync`)
 - **Language:** Go (pure Go, single static binary, no cgo, no external tools)
@@ -13,27 +13,27 @@ A Go CLI that scans folders of photos and home movies, reads their embedded meta
 
 | # | Decision | Source |
 |---|---|---|
-| D1 | Go, pure-Go dependencies only; no exiftool/ffprobe, no cgo | Cliff |
-| D2 | New repo `media-organizer` | Cliff |
-| D3 | Default operation is **copy**; **move** only with an explicit flag | Cliff |
-| D4 | Date source chain is configurable; default `exif → filename → mtime` | Cliff |
-| D5 | Identical-content collision policy is configurable; default **skip & report**; alternatives: keep both (suffix), send to duplicates folder | Cliff |
-| D6 | Sidecars/pairs (`.xmp`, `.aae`, `.thm`, Live Photo HEIC+MOV, RAW+JPEG) grouped only with an opt-in flag | Cliff |
-| D7 | Filenames use a configurable template; default sequence is per day, ordered by capture time, `{seq:4}` | Cliff |
-| D8 | v1 layout schemes: **date-based** (YYYY/MM/DD, YYYY/MM, YYYY, …) and **by media type** (Photos/Videos/Raw) | Cliff |
-| D9 | EXIF times without a timezone are treated as camera-local wall clock; `OffsetTime*` tags are used when present; no conversion | Cliff |
+| D1 | Go, pure-Go dependencies only; no exiftool/ffprobe, no cgo | CaffeineOgre |
+| D2 | New repo `media-organizer` | CaffeineOgre |
+| D3 | Default operation is **copy**; **move** only with an explicit flag | CaffeineOgre |
+| D4 | Date source chain is configurable; default `exif → filename → mtime` | CaffeineOgre |
+| D5 | Identical-content collision policy is configurable; default **skip & report**; alternatives: keep both (suffix), send to duplicates folder | CaffeineOgre |
+| D6 | Sidecars/pairs (`.xmp`, `.aae`, `.thm`, Live Photo HEIC+MOV, RAW+JPEG) grouped only with an opt-in flag | CaffeineOgre |
+| D7 | Filenames use a configurable template; default sequence is per day, ordered by capture time, `{seq:4}` | CaffeineOgre |
+| D8 | v1 layout schemes: **date-based** (YYYY/MM/DD, YYYY/MM, YYYY, …) and **by media type** (Photos/Videos/Raw) | CaffeineOgre |
+| D9 | EXIF times without a timezone are treated as camera-local wall clock; `OffsetTime*` tags are used when present; no conversion | CaffeineOgre |
 | D10 | When required input is missing or ambiguous, the CLI **asks** (TTY) or **fails with a clear error** (no TTY). It never silently picks a layout | Requirement |
-| D11 | **`undo` command**: every apply writes a journal; `media-organizer undo <journal>` reverses it, after checking that each destination file is unchanged (by hash) | Cliff |
-| D12 | **Move deletes the source only after the copy is verified** (hash of the written file equals the source hash, after fsync). If verification fails, the source is kept and the bad copy is removed. Same-device moves use an atomic rename (no copy, so nothing to verify) | Cliff |
-| D13 | **Schemes combine** in any order as path segments, e.g. `type,date-ym` → `Photos/2023/01`, `date-ym,type` → `2023/01/Photos` | Cliff |
-| D14 | With no rename, files **keep their original name** (collision policy still applies) | Cliff |
-| D15 | **Re-run sequence conflict** (new file sorts before existing numbered files for that day): prompt the user to choose append or renumber. With `--non-interactive`, no TTY, or a prompt timeout, print a message explaining the conflict and the flag that settles it (`--seq-conflict=append\|renumber`), then exit non-zero without changing anything | Cliff |
-| D16 | Config file is **TOML** | Cliff |
-| D17 | **`--tz <IANA zone>`** flag (also settable in config) | Cliff |
-| D18 | Files dated from **mtime** are both flagged in the report/JSON **and** placed under an `Unverified/` subtree of the destination | Cliff |
-| D19 | Duplicate detection is this tool's own Go implementation (size grouping + SHA-256); no reuse of `file-deduper` | Cliff |
-| D20 | **Prompt timeout** defaults to **60 s** for every prompt; configurable with `--prompt-timeout` (and in config). On timeout: message + non-zero exit, no changes | Cliff |
-| D21 | **`--tz` semantics:** EXIF times with no offset are read as being in that zone; UTC-only video times (QuickTime `mvhd`/`tkhd`) are converted to that zone for foldering and naming. **Without `--tz`, UTC-only video times are used as UTC** (no conversion); naive EXIF times stay camera-local (D9) | Cliff |
+| D11 | **`undo` command**: every apply writes a journal; `media-organizer undo <journal>` reverses it, after checking that each destination file is unchanged (by hash) | CaffeineOgre |
+| D12 | **Move deletes the source only after the copy is verified** (hash of the written file equals the source hash, after fsync). If verification fails, the source is kept and the bad copy is removed. Same-device moves use an atomic rename (no copy, so nothing to verify) | CaffeineOgre |
+| D13 | **Schemes combine** in any order as path segments, e.g. `type,date-ym` → `Photos/2023/01`, `date-ym,type` → `2023/01/Photos` | CaffeineOgre |
+| D14 | With no rename, files **keep their original name** (collision policy still applies) | CaffeineOgre |
+| D15 | **Re-run sequence conflict** (new file sorts before existing numbered files for that day): prompt the user to choose append or renumber. With `--non-interactive`, no TTY, or a prompt timeout, print a message explaining the conflict and the flag that settles it (`--seq-conflict=append\|renumber`), then exit non-zero without changing anything | CaffeineOgre |
+| D16 | Config file is **TOML** | CaffeineOgre |
+| D17 | **`--tz <IANA zone>`** flag (also settable in config) | CaffeineOgre |
+| D18 | Files dated from **mtime** are both flagged in the report/JSON **and** placed under an `Unverified/` subtree of the destination | CaffeineOgre |
+| D19 | Duplicate detection is this tool's own Go implementation (size grouping + SHA-256); no reuse of `file-deduper` | CaffeineOgre |
+| D20 | **Prompt timeout** defaults to **60 s** for every prompt; configurable with `--prompt-timeout` (and in config). On timeout: message + non-zero exit, no changes | CaffeineOgre |
+| D21 | **`--tz` semantics:** EXIF times with no offset are read as being in that zone; UTC-only video times (QuickTime `mvhd`/`tkhd`) are converted to that zone for foldering and naming. **Without `--tz`, UTC-only video times are used as UTC** (no conversion); naive EXIF times stay camera-local (D9) | CaffeineOgre |
 
 ### Architect's proposals (accept or change in review)
 
@@ -140,7 +140,7 @@ Conventions: each task is sized for one agent in one sitting (~½–1 day). **�
 | T0.1 | Scaffold repo: `go mod`, layout (`cmd/media-organizer`, `internal/{walk,detect,meta,datechain,hash,template,sanitize,planner,fsops,journal,config,cli}`), Makefile, `.golangci.yml`, LICENSE, README stub | — | `go build ./...` passes; empty packages compile |
 | T0.2 | CI: GitHub Actions matrix (ubuntu/macos/windows × amd64/arm64 where available), race tests, lint, `govulncheck`, `gosec` | T0.1 | Green pipeline on an empty project |
 | T0.3 ∥ | **Spike:** evaluate pure-Go metadata libraries against a sample corpus (JPEG, HEIC, DNG, CR3, NEF, ARW, MP4, MOV, 3GP, AVI); record coverage, license, maintenance, fuzz robustness → ADR-001 | T0.1 | ADR with chosen lib(s) and a format coverage table |
-| T0.4 ∥ | ADR-002: template grammar, token list, and layout composition (D13, D14); ADR-003: CLI command/flag surface and prompt flow (D15, D20); ADR-005: journal format and undo semantics (D11, D12) | T0.1 | ADRs merged and reviewed by Cliff |
+| T0.4 ∥ | ADR-002: template grammar, token list, and layout composition (D13, D14); ADR-003: CLI command/flag surface and prompt flow (D15, D20); ADR-005: journal format and undo semantics (D11, D12) | T0.1 | ADRs merged and reviewed by CaffeineOgre |
 | T0.5 ∥ | Threat model (STRIDE) and secure-defaults ADR-004, mapping S1–S11 to owning tasks | T0.1 | Every S-item has an owning task and a test |
 | T0.6 | Freeze core types and interfaces in `internal/model`: `MediaItem`, `DateResult{Time, Offset, Source, Confidence}`, `Extractor`, `PlanOp{Src, Dst, Kind, Group}`, `Plan`, `JournalEntry`, `Policy` enums | T0.3, T0.4 | Package compiles; godoc complete; signed off |
 | T0.7 ∥ | Test corpus: generate synthetic fixtures (via a Go generator script: crafted EXIF/QuickTime headers, no personal photos), including malformed/hostile samples, Unicode names, reserved names | T0.1 | `testdata/` with manifest of expected metadata |
@@ -195,10 +195,10 @@ Conventions: each task is sized for one agent in one sitting (~½–1 day). **�
 
 | ID | Task | Acceptance criteria |
 |---|---|---|
-| T4.1 ∥ | README, usage guide, template reference, config reference, security notes, FAQ (timezones, undated files) | Reviewed by Cliff |
+| T4.1 ∥ | README, usage guide, template reference, config reference, security notes, FAQ (timezones, undated files) | Reviewed by CaffeineOgre |
 | T4.2 ∥ | Release pipeline: GoReleaser, cross-compiled binaries, checksums, SBOM, signing (cosign), `-trimpath` reproducible builds | Tagged `v0.1.0` artifacts verify |
 | T4.3 ∥ | Man page and shell completions (bash/zsh/fish/PowerShell) | Generated in release |
-| T4.4 | v1 acceptance: Cliff runs it on a real library copy with dry-run → apply → undo | Sign-off |
+| T4.4 | v1 acceptance: CaffeineOgre runs it on a real library copy with dry-run → apply → undo | Sign-off |
 
 ## 6. Parallelism Map
 
