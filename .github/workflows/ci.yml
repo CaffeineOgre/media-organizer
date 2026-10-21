@@ -19,16 +19,22 @@ jobs:
         include:
           - os: ubuntu-latest
             name: Linux amd64
+            race: true
           - os: ubuntu-24.04-arm
             name: Linux arm64
+            race: true
           - os: macos-latest
             name: macOS arm64
+            race: true
           - os: macos-15-intel
             name: macOS amd64
+            race: true
           - os: windows-latest
             name: Windows amd64
+            race: true
           - os: windows-11-arm
             name: Windows arm64
+            race: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -43,9 +49,14 @@ jobs:
         run: go mod verify
 
       - name: Run tests with race detector
+        if: matrix.race
         run: go test -v -race ./...
         env:
           CGO_ENABLED: 1
+
+      - name: Run tests
+        if: ${{ !matrix.race }}
+        run: go test -v ./...
 
       - name: Build binary
         run: go build -trimpath -v ./...
