@@ -139,26 +139,26 @@ Conventions: each task is sized for one agent in one sitting (~½–1 day). **�
 |---|---|---|---|
 | T0.1 | Scaffold repo: `go mod`, layout (`cmd/media-organizer`, `internal/{walk,detect,meta,datechain,hash,template,sanitize,planner,fsops,journal,config,cli}`), Makefile, `.golangci.yml`, LICENSE, README stub | — | `go build ./...` passes; empty packages compile |
 | T0.2 | CI: GitHub Actions matrix (ubuntu/macos/windows × amd64/arm64 where available), race tests, lint, `govulncheck`, `gosec` | T0.1 | Green pipeline on an empty project |
-| T0.3 ∥ | **Spike:** evaluate pure-Go metadata libraries against a sample corpus (JPEG, HEIC, DNG, CR3, NEF, ARW, MP4, MOV, 3GP, AVI); record coverage, license, maintenance, fuzz robustness → ADR-001 | T0.1 | ADR with chosen lib(s) and a format coverage table |
-| T0.4 ∥ | ADR-002: template grammar, token list, and layout composition (D13, D14); ADR-003: CLI command/flag surface and prompt flow (D15, D20); ADR-005: journal format and undo semantics (D11, D12) | T0.1 | ADRs merged and reviewed by CaffeineOgre |
-| T0.5 ∥ | Threat model (STRIDE) and secure-defaults ADR-004, mapping S1–S11 to owning tasks | T0.1 | Every S-item has an owning task and a test |
+| T0.3 | **Spike:** evaluate pure-Go metadata libraries against a sample corpus (JPEG, HEIC, DNG, CR3, NEF, ARW, MP4, MOV, 3GP, AVI); record coverage, license, maintenance, fuzz robustness → ADR-001 | T0.1 | ADR with chosen lib(s) and a format coverage table |
+| T0.4 | ADR-002: template grammar, token list, and layout composition (D13, D14); ADR-003: CLI command/flag surface and prompt flow (D15, D20); ADR-005: journal format and undo semantics (D11, D12) | T0.1 | ADRs merged and reviewed by CaffeineOgre |
+| T0.5 | Threat model (STRIDE) and secure-defaults ADR-004, mapping S1–S11 to owning tasks | T0.1 | Every S-item has an owning task and a test |
 | T0.6 | Freeze core types and interfaces in `internal/model`: `MediaItem`, `DateResult{Time, Offset, Source, Confidence}`, `Extractor`, `PlanOp{Src, Dst, Kind, Group}`, `Plan`, `JournalEntry`, `Policy` enums | T0.3, T0.4 | Package compiles; godoc complete; signed off |
-| T0.7 ∥ | Test corpus: generate synthetic fixtures (via a Go generator script: crafted EXIF/QuickTime headers, no personal photos), including malformed/hostile samples, Unicode names, reserved names | T0.1 | `testdata/` with manifest of expected metadata |
+| T0.7 | Test corpus: generate synthetic fixtures (via a Go generator script: crafted EXIF/QuickTime headers, no personal photos), including malformed/hostile samples, Unicode names, reserved names | T0.1 | `testdata/` with manifest of expected metadata |
 
 ### Sprint 1 — Core components (fully parallel; each depends only on T0.6)
 
 | ID | Task | Acceptance criteria |
 |---|---|---|
-| T1.1 ∥ | `walk`: concurrent multi-root walker; symlink policy (S4); include/exclude globs; hidden/junk filters; destination-inside-source exclusion; deterministic order option | Cycle test with `--follow-symlinks`; Windows junction test; 1M-entry synthetic tree bench |
-| T1.2 ∥ | `hash`: streaming SHA-256 with buffer pool; size-first grouping helper; I/O limiter (D19) | Throughput bench; no file fully buffered |
-| T1.3 ∥ | `meta/image`: EXIF via chosen lib → `DateTimeOriginal` > `CreateDate` > `DateTime`, `OffsetTime*`, `SubSecTime*`, Make/Model; bounded reads (S5); return naive vs offset-aware time distinctly so `--tz` can apply | Fixtures pass; 10-min fuzz clean; malformed files return error, no panic |
-| T1.4 ∥ | `meta/video`: MP4/MOV/3GP atoms (`mvhd`/`tkhd` creation_time, 1904 epoch, UTC; Apple `creationdate` with offset; `©day`), zero/1904 dates treated as missing; AVI `IDIT` best effort; mark UTC-only times (D21) | Fixtures pass; fuzz clean |
-| T1.5 ∥ | `meta/filename`: date parsers for common patterns (`IMG_20230102_123456`, `PXL_…`, `VID-20230102-WA0001`, `2023-01-02 12.34.56`, `Screenshot_…`), with year-range sanity check | Table test ≥ 30 patterns, false-positive guard (e.g., `IMG_1234`) |
-| T1.6 ∥ | `template`: parser, validator (unknown tokens and missing `{ext}` are errors at startup), renderer, presets, comma-separated layout composition (D13), original-name default (D14) | Golden tests per preset and for combined layouts; fuzz the parser |
-| T1.7 ∥ | `sanitize`: S2/S3 component and full-path safety, case-fold key for collision detection | Traversal and reserved-name table tests on all 3 OSes in CI |
-| T1.8 ∥ | `config`: TOML loading (D16) from platform paths (P6), env overrides, flag precedence (flags > env > file > defaults), schema validation, `config init` writes an example | Precedence tests; unknown keys rejected |
-| T1.9 ∥ | `fsops`: `CopyVerified`, `MoveVerified` (rename fast path on same device, else copy → verify hash → delete source only on match, per D12), `Hardlink` (optional), temp file + fsync + atomic rename, permission/mtime preservation, `O_EXCL` | Fault-injection tests (disk full, interrupted copy, read-only dest); no temp files left behind |
-| T1.10 ∥ | `detect`: magic-byte sniffing for supported formats; extension/content mismatch reported | Fixture table incl. renamed files |
+| T1.1  | `walk`: concurrent multi-root walker; symlink policy (S4); include/exclude globs; hidden/junk filters; destination-inside-source exclusion; deterministic order option | Cycle test with `--follow-symlinks`; Windows junction test; 1M-entry synthetic tree bench |
+| T1.2  | `hash`: streaming SHA-256 with buffer pool; size-first grouping helper; I/O limiter (D19) | Throughput bench; no file fully buffered |
+| T1.3  | `meta/image`: EXIF via chosen lib → `DateTimeOriginal` > `CreateDate` > `DateTime`, `OffsetTime*`, `SubSecTime*`, Make/Model; bounded reads (S5); return naive vs offset-aware time distinctly so `--tz` can apply | Fixtures pass; 10-min fuzz clean; malformed files return error, no panic |
+| T1.4  | `meta/video`: MP4/MOV/3GP atoms (`mvhd`/`tkhd` creation_time, 1904 epoch, UTC; Apple `creationdate` with offset; `©day`), zero/1904 dates treated as missing; AVI `IDIT` best effort; mark UTC-only times (D21) | Fixtures pass; fuzz clean |
+| T1.5  | `meta/filename`: date parsers for common patterns (`IMG_20230102_123456`, `PXL_…`, `VID-20230102-WA0001`, `2023-01-02 12.34.56`, `Screenshot_…`), with year-range sanity check | Table test ≥ 30 patterns, false-positive guard (e.g., `IMG_1234`) |
+| T1.6  | `template`: parser, validator (unknown tokens and missing `{ext}` are errors at startup), renderer, presets, comma-separated layout composition (D13), original-name default (D14) | Golden tests per preset and for combined layouts; fuzz the parser |
+| T1.7  | `sanitize`: S2/S3 component and full-path safety, case-fold key for collision detection | Traversal and reserved-name table tests on all 3 OSes in CI |
+| T1.8  | `config`: TOML loading (D16) from platform paths (P6), env overrides, flag precedence (flags > env > file > defaults), schema validation, `config init` writes an example | Precedence tests; unknown keys rejected |
+| T1.9  | `fsops`: `CopyVerified`, `MoveVerified` (rename fast path on same device, else copy → verify hash → delete source only on match, per D12), `Hardlink` (optional), temp file + fsync + atomic rename, permission/mtime preservation, `O_EXCL` | Fault-injection tests (disk full, interrupted copy, read-only dest); no temp files left behind |
+| T1.10 | `detect`: magic-byte sniffing for supported formats; extension/content mismatch reported | Fixture table incl. renamed files |
 
 ### Sprint 2 — Orchestration (parallel in two lanes)
 
@@ -185,19 +185,19 @@ Conventions: each task is sized for one agent in one sitting (~½–1 day). **�
 
 | ID | Task | Deps | Acceptance criteria |
 |---|---|---|---|
-| T3.1 ∥ | End-to-end test suite: every preset × copy/move × dup policy × sidecars on/off, on all 3 OSes | Sprint 2 | CI matrix green |
-| T3.2 ∥ | Fuzzing campaign: `go test -fuzz` for every parser, template, sanitizer; seed corpus committed; nightly CI fuzz job | Sprint 1 | ≥ 1h per target clean; crashes become regression tests |
-| T3.3 ∥ | Security review against S1–S11 and threat model; hostile-corpus E2E (traversal names, huge IFD counts, zip-bomb-like atoms, symlink races) | Sprint 2 | Findings fixed or ADR'd |
-| T3.4 ∥ | Performance: benchmarks on 100k-file synthetic set, SSD vs HDD vs network share; tune `-j`/`--io-jobs` defaults; profile memory | Sprint 2 | Documented throughput; RSS bounded independent of tree size |
-| T3.5 ∥ | Filesystem edge cases: exFAT/FAT32 (camera cards: 2s mtime, no hardlinks), NTFS case-insensitivity, APFS normalization, long paths on Windows (`\\?\`) | Sprint 2 | Tests or documented limits |
+| T3.1  | End-to-end test suite: every preset × copy/move × dup policy × sidecars on/off, on all 3 OSes | Sprint 2 | CI matrix green |
+| T3.2  | Fuzzing campaign: `go test -fuzz` for every parser, template, sanitizer; seed corpus committed; nightly CI fuzz job | Sprint 1 | ≥ 1h per target clean; crashes become regression tests |
+| T3.3  | Security review against S1–S11 and threat model; hostile-corpus E2E (traversal names, huge IFD counts, zip-bomb-like atoms, symlink races) | Sprint 2 | Findings fixed or ADR'd |
+| T3.4  | Performance: benchmarks on 100k-file synthetic set, SSD vs HDD vs network share; tune `-j`/`--io-jobs` defaults; profile memory | Sprint 2 | Documented throughput; RSS bounded independent of tree size |
+| T3.5  | Filesystem edge cases: exFAT/FAT32 (camera cards: 2s mtime, no hardlinks), NTFS case-insensitivity, APFS normalization, long paths on Windows (`\\?\`) | Sprint 2 | Tests or documented limits |
 
 ### Sprint 4 — Docs and release (parallel)
 
 | ID | Task | Acceptance criteria |
 |---|---|---|
-| T4.1 ∥ | README, usage guide, template reference, config reference, security notes, FAQ (timezones, undated files) | Reviewed by CaffeineOgre |
-| T4.2 ∥ | Release pipeline: GoReleaser, cross-compiled binaries, checksums, SBOM, signing (cosign), `-trimpath` reproducible builds | Tagged `v0.1.0` artifacts verify |
-| T4.3 ∥ | Man page and shell completions (bash/zsh/fish/PowerShell) | Generated in release |
+| T4.1 | README, usage guide, template reference, config reference, security notes, FAQ (timezones, undated files) | Reviewed by CaffeineOgre |
+| T4.2 | Release pipeline: GoReleaser, cross-compiled binaries, checksums, SBOM, signing (cosign), `-trimpath` reproducible builds | Tagged `v0.1.0` artifacts verify |
+| T4.3 | Man page and shell completions (bash/zsh/fish/PowerShell) | Generated in release |
 | T4.4 | v1 acceptance: CaffeineOgre runs it on a real library copy with dry-run → apply → undo | Sign-off |
 
 ## 6. Parallelism Map
